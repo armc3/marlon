@@ -227,7 +227,7 @@ body {
 .hero-highlight-custom {
     font-family: var(--font-body);
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-primary);
     padding-bottom: 16px;
 }
@@ -235,12 +235,18 @@ body {
     font-family: var(--font-display);
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 1.1em;
+    letter-spacing: 0.02em;
+    font-size: 1.6rem;
+    vertical-align: baseline;
+}
+.hero-highlight-custom-arrow {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-primary);
 }
 .hero-highlight-custom-text {
     font-weight: 400;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.65);
 }
 
 .report-artist-name {
@@ -1991,8 +1997,11 @@ a.socials-breakdown-label:hover {
                 // Custom text line?
                 const custom = customLines[key];
                 if (custom) {
+                    // Split trailing arrow out of header so it renders in body font
+                    const hdr = custom.header.replace(/\s*→\s*$/, '');
+                    const hasArrow = custom.header.includes('→');
                     return `<div class="hero-highlight-card hero-highlight-custom">
-                        <span class="hero-highlight-custom-header">${esc(custom.header)}</span> <span class="hero-highlight-custom-text">${esc(custom.text)}</span>
+                        <span class="hero-highlight-custom-header">${esc(hdr)}</span>${hasArrow ? ' <span class="hero-highlight-custom-arrow">→</span>' : ''} <span class="hero-highlight-custom-text">${esc(custom.text)}</span>
                     </div>`;
                 }
                 // Stat card
