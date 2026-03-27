@@ -232,12 +232,11 @@ body {
     padding-bottom: 16px;
 }
 .hero-highlight-custom-header {
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-.hero-highlight-custom-sep {
-    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1.1em;
 }
 .hero-highlight-custom-text {
     font-weight: 400;
@@ -1993,7 +1992,7 @@ a.socials-breakdown-label:hover {
                 const custom = customLines[key];
                 if (custom) {
                     return `<div class="hero-highlight-card hero-highlight-custom">
-                        <span class="hero-highlight-custom-header">${esc(custom.header)}</span><span class="hero-highlight-custom-sep">:</span> <span class="hero-highlight-custom-text">${esc(custom.text)}</span>
+                        <span class="hero-highlight-custom-header">${esc(custom.header)}</span> <span class="hero-highlight-custom-text">${esc(custom.text)}</span>
                     </div>`;
                 }
                 // Stat card
