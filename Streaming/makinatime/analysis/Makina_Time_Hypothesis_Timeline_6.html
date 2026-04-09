@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Makina Time — Hypothesis Timeline</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#1a1a1a;padding:32px 40px;font-size:13px;line-height:1.6}
+h1{font-size:20px;font-weight:500;color:#1a1a1a;margin-bottom:3px}
+.subtitle{font-size:13px;color:#666;margin-bottom:20px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:12px}
+.legend span{display:flex;align-items:center;gap:6px;font-size:12px;color:#555}
+.leg-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.chart-wrap{position:relative;width:100%}
+.section-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin:8px 0 4px}
+.phase-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.phase{border-radius:6px;padding:13px 15px;border-left:3px solid}
+.phase.p1{background:#EEF4FB;border-color:#378ADD}
+.phase.p2{background:#F4F4F2;border-color:#888780}
+.phase.p3{background:#EAF3DE;border-color:#639922}
+.phase .ph{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#999;margin-bottom:4px}
+.phase .pt{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.phase .pd{font-size:11px;color:#555;line-height:1.55}
+.phase{cursor:default;transition:box-shadow 0.15s}
+.phase:hover{box-shadow:0 0 0 1.5px currentColor}
+.divider{border:none;border-top:1px solid #eee;margin:16px 0 10px}
+.cluster-key{display:flex;flex-wrap:wrap;gap:16px}
+.ck{font-size:11px;color:#777;display:flex;align-items:center;gap:5px}
+.ck-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.footnote{font-size:10px;color:#aaa;margin-top:16px}
+</style>
+</head>
+<body>
+
+<h1>Makina Time — Independent Playlists &amp; Algorithmic Stream Hypothesis</h1>
+<p class="subtitle">Marlon Hoffstadt &amp; Dimitri Vegas &nbsp;·&nbsp; Jan 23 – Apr 6, 2026 &nbsp;·&nbsp; Spotify for Artists data</p>
+
+<div class="legend">
+  <span><span class="leg-sq" style="background:#378ADD"></span>Algorithmic streams (Radio, AI DJ, autoplay, Daily Mixes)</span>
+  <span><span class="leg-sq" style="background:#E23B3B"></span>Independent playlist streams</span>
+  <span><span class="leg-sq" style="background:#1D9E75"></span>Editorial &amp; personalised editorial</span>
+</div>
+<div class="legend" style="margin-top:-6px;margin-bottom:12px">
+  <span style="font-size:11px;color:#888">Annotation lines:</span>
+  <span><span class="leg-sq" style="background:#3B6D11;border-radius:50%"></span>Independent playlist clusters</span>
+  <span><span class="leg-sq" style="background:#1a1a1a;border-radius:50%"></span>Spotify editorial (hover for detail)</span>
+</div>
+
+<div class="chart-wrap" style="height:280px"><canvas id="mainChart"></canvas></div>
+<div class="section-label">Behavioural signals — daily saves &amp; playlist adds</div>
+<div class="chart-wrap" style="height:80px"><canvas id="signalChart"></canvas></div>
+<div class="section-label">Independent playlist additions</div>
+<div class="chart-wrap" style="height:70px"><canvas id="annotChart"></canvas></div>
+
+<div class="phase-strip">
+  <div class="phase p1">
+    <div class="ph">Phase 1 &nbsp;·&nbsp; Jan 23 – Feb 25</div>
+    <div class="pt">Launch momentum &amp; natural decay</div>
+    <div class="pd">Algo fires immediately from Release Radar and existing fan radio — Marlon Hoffstadt and Dimitri Vegas combined fanbase means no cold start. Natural post-release decline follows. Early independent playlist clusters (C1, C2) build quietly but remain below the collaborative filter threshold needed to influence the algo.</div>
+    <div class="pd" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(55,138,221,0.2);color:#185FA5"><strong>Editorial:</strong> Spotify curators move immediately on release — mint (5.6M), 360 Dance, New Music Friday across DE/BE/NL/FR all added Jan 22. Main Stage (1.8M followers) follows Jan 28, generating 461k streams and feeding sustained listener data through the decay period.</div>
+  </div>
+  <div class="phase p2">
+    <div class="ph">Phase 2 &nbsp;·&nbsp; Feb 26 – Mar 7</div>
+    <div class="pt">Threshold crossed</div>
+    <div class="pd">Cluster 3 lands Feb 26 — Bass Music Girl (644k followers), ES-A (554k), Workout Music (1.9M). The track is now embedded across enough independent playlists that Spotify's collaborative filter connects it to listeners whose taste profiles overlap, regardless of prior exposure to the artist.</div>
+    <div class="pd" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(136,135,128,0.2);color:#5F5E5A"><strong>Editorial:</strong> No new major editorial placements during this window — the algo response is driven by independent playlist signal alone, not editorial amplification.</div>
+  </div>
+  <div class="phase p3">
+    <div class="ph">Phase 3 &nbsp;·&nbsp; Mar 8 onwards</div>
+    <div class="pt">Sustained algorithmic growth</div>
+    <div class="pd">Unlike the launch spike — which was borrowed from existing fanbase momentum and decayed — this uplift holds and compounds. Algo streams grow from ~40k to ~75k+ daily. Playlist graph positioning is structural and self-reinforcing where release-day momentum is not.</div>
+    <div class="pd" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(99,153,34,0.2);color:#3B6D11"><strong>Editorial dividend:</strong> Dance Hits (4.4M followers) added Mar 12 — Spotify's editorial team responding to the track's growing algorithmic momentum. Editorial is now following the algo, not leading it. This is the flywheel completing its cycle.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="cluster-key">
+  <div class="ck"><div class="ck-dot" style="background:#BA7517"></div>Cluster 1 — Feb 13: Party Hits 2026 (Tough Stuff Music)</div>
+  <div class="ck"><div class="ck-dot" style="background:#888780"></div>Cluster 2 — Feb 17 + Feb 21: Workout Remix (Tough Stuff) + MusicUp ×2</div>
+  <div class="ck"><div class="ck-dot" style="background:#3B6D11"></div>Cluster 3 — Feb 26: Bass Music Girl, ES-A, Workout Music &nbsp;<strong>← threshold event</strong></div>
+  <div class="ck"><div class="ck-dot" style="background:#bbb"></div>Later additions — Mar 8 (Techno Bunker), Mar 28 (Naeleck)</div>
+</div>
+
+<p class="footnote">Algorithmic source bucket includes: Spotify Radio, AI DJ, autoplay, Discover Weekly, Daily Mixes, Release Radar and all personalised Spotify-generated programming. &nbsp;·&nbsp; Jan 22 pre-release data reflects early streams from Australian and Eastern territories ahead of global release.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dates = ['Jan 22','Jan 23','Jan 24','Jan 25','Jan 26','Jan 27','Jan 28','Jan 29','Jan 30','Jan 31','Feb 1','Feb 2','Feb 3','Feb 4','Feb 5','Feb 6','Feb 7','Feb 8','Feb 9','Feb 10','Feb 11','Feb 12','Feb 13','Feb 14','Feb 15','Feb 16','Feb 17','Feb 18','Feb 19','Feb 20','Feb 21','Feb 22','Feb 23','Feb 24','Feb 25','Feb 26','Feb 27','Feb 28','Mar 1','Mar 2','Mar 3','Mar 4','Mar 5','Mar 6','Mar 7','Mar 8','Mar 9','Mar 10','Mar 11','Mar 12','Mar 13','Mar 14','Mar 15','Mar 16','Mar 17','Mar 18','Mar 19','Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6'];
+const algo = [2151,110343,42349,32030,46403,46680,49206,55698,101087,54880,32289,47898,45802,60900,60155,92666,46292,32732,37462,45171,37884,47845,96894,50049,36626,53470,42853,38372,54391,85565,51225,22846,30785,40570,39171,39712,52326,38680,42987,56180,42715,55703,57846,77659,52518,40073,58187,55615,60964,75531,72515,64911,52860,61941,60884,67443,63944,62704,56338,54946,71304,62095,70796,69703,82030,51543,57516,72984,65559,70686,65736,68406,79644,56342,75839];
+const indep = [25,11029,12007,8757,10926,11393,11499,12059,13334,12328,9319,11580,11633,11898,12509,14388,13626,9835,12151,12988,13138,13606,16500,15300,11209,13461,14323,15977,16474,20153,20051,16024,21644,23035,24744,32534,40833,36631,29928,42025,42553,42625,43121,47577,42205,33451,45538,46109,45887,46478,50791,45122,36364,47323,47057,46897,47247,50951,45130,35367,45690,46156,44855,44949,50242,44795,41180,53661,55981,57845,59080,54192,54833,44686,52279];
+const editorial = [335,64167,23792,14307,17177,18109,17975,18460,24739,18214,13089,15661,16546,17261,18285,26345,20862,13042,16435,17781,17598,17973,23129,19158,13851,17996,18524,18819,19412,25567,23350,16168,20330,21764,22091,21919,23857,20449,16189,20280,21560,22400,21914,26452,23611,18048,22236,23015,23038,23330,30932,28589,22166,28008,30046,30585,35122,41121,37076,27548,31536,32094,31172,31371,31822,28895,21220,27575,29362,29901,32252,29360,31393,24442,27504];
+const saves = [898,29871,9775,6774,7612,5958,5838,5781,8034,5002,4402,4675,5264,5000,5818,9588,4948,3423,3632,4372,4119,4240,6929,5022,3630,5866,5296,4280,4610,6535,4881,3248,3208,3765,4224,4329,4901,4212,3830,4173,3925,4492,4991,5984,4801,3851,4375,4674,4428,5638,5770,5461,4428,4486,4436,5081,5111,5518,4851,4243,4426,4428,4883,5041,6371,6195,7498,7430,6648,6706,7359,7304,7416,5839,6237];
+const pl_adds = [1051,17306,8136,5688,6152,5237,4830,5631,7486,4882,3744,4115,3950,4189,4770,7535,4793,3557,3655,4066,3911,4116,6553,4645,3660,5107,4450,3865,4286,6005,4739,3493,3430,3776,3845,4039,4887,4410,4124,4211,3722,4382,4658,5450,4628,4033,4424,4290,4350,5648,5671,5481,4690,4491,4589,4653,4849,5229,5159,4830,4744,4802,5284,5243,6622,5796,6352,6259,6019,6048,6338,6538,6628,5546,6289];
+
+// Cluster definitions — idx matches dates array index
+const clusters = [
+  {idx:22, color:'#BA7517', label:'C1',   line1:'Feb 13', line2:'Party Hits',      threshold:false},
+  {idx:26, color:'#888780', label:'C2a',  line1:'Feb 17', line2:'Workout Remix',   threshold:false},
+  {idx:30, color:'#888780', label:'C2b',  line1:'Feb 21', line2:'MusicUp ×2',      threshold:false},
+  {idx:35, color:'#3B6D11', label:'C3 ★', line1:'Feb 26', line2:'Bass MG · ES-A · Workout Music', threshold:true},
+  {idx:45, color:'#bbb',    label:'',     line1:'Mar 8',  line2:'Techno Bunker',   threshold:false},
+  {idx:65, color:'#bbb',    label:'',     line1:'Mar 28', line2:'Naeleck',         threshold:false},
+];
+
+// Editorial lines — Main Stage and Dance Hits only, shown on main chart with tooltip
+const editorials = [
+  {idx:6,  color:'#1a1a1a', label:'Main Stage',  detail:'Main Stage · Jan 28 · 1.8M followers · 461k streams · Spotify Editorial', major:true},
+  {idx:49, color:'#1a1a1a', label:'Dance Hits',  detail:'Dance Hits · Mar 12 · 4.4M followers · Spotify Editorial ← editorial dividend', major:true},
+];
+// Editorial tooltip state
+let editTooltip = null;
+
+function clusterPlugin(id) {
+  return {
+    id: 'cp_'+id,
+    afterDraw(chart) {
+      const {ctx, chartArea:{top, bottom}, scales:{x}} = chart;
+      if (!x) return;
+      clusters.forEach(({idx, color, threshold}) => {
+        const px = x.getPixelForValue(idx);
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = threshold ? 1.8 : 1;
+        ctx.setLineDash(threshold ? [6,3] : [3,3]);
+        ctx.globalAlpha = threshold ? 1 : 0.6;
+        ctx.beginPath(); ctx.moveTo(px, top); ctx.lineTo(px, bottom); ctx.stroke();
+        ctx.restore();
+      });
+      // Only draw editorial lines on the main chart, not signal/annot panels
+      if (id === 'main') {
+        editorials.forEach(({idx, color}) => {
+          const px = x.getPixelForValue(idx);
+          ctx.save();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([4,3]);
+          ctx.globalAlpha = 0.85;
+          ctx.beginPath(); ctx.moveTo(px, top); ctx.lineTo(px, bottom); ctx.stroke();
+          ctx.restore();
+        });
+      }
+    }
+  };
+}
+
+// Plugin: annotation panel — pills + labels using chart's own x scale
+const annotPlugin = {
+  id: 'annotPlugin',
+  afterDraw(chart) {
+    const {ctx, chartArea:{left, right, top, bottom}, scales:{x}} = chart;
+    if (!x) return;
+    const H = bottom - top;
+    const midY = top + H / 2;
+
+    clusters.forEach(({idx, color, label, line1, line2, threshold}) => {
+      const px = x.getPixelForValue(idx);
+
+      // Vertical line
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = threshold ? 1.8 : 1;
+      ctx.setLineDash(threshold ? [6,3] : [3,3]);
+      ctx.globalAlpha = threshold ? 1 : 0.6;
+      ctx.beginPath(); ctx.moveTo(px, top); ctx.lineTo(px, bottom); ctx.stroke();
+      ctx.restore();
+
+      if (!label) return;
+
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.setLineDash([]);
+
+      // Pill
+      const fSize = threshold ? 11 : 10;
+      ctx.font = (threshold ? '700 ' : '500 ') + fSize + 'px Helvetica Neue,Arial,sans-serif';
+      const tw = ctx.measureText(label).width;
+      const pw = tw + 12, ph = 18, pr = 4;
+      const pillX = Math.max(left, Math.min(right - pw, px - pw / 2));
+      const pillY = top + 4;
+
+      // Pill fill
+      ctx.fillStyle = threshold ? color : color + '20';
+      ctx.beginPath();
+      ctx.roundRect(pillX, pillY, pw, ph, pr);
+      ctx.fill();
+
+      // Pill stroke for non-threshold
+      if (!threshold) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Pill text
+      ctx.fillStyle = threshold ? '#fff' : color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, pillX + pw / 2, pillY + ph / 2);
+
+      // Line 1 (date)
+      ctx.font = '9px Helvetica Neue,Arial,sans-serif';
+      ctx.fillStyle = threshold ? color : '#999';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(line1, px, pillY + ph + 3);
+
+      // Line 2 (detail) — only for threshold, others too cramped
+      if (threshold) {
+        ctx.font = '9px Helvetica Neue,Arial,sans-serif';
+        ctx.fillStyle = color;
+        ctx.fillText(line2, px, pillY + ph + 14);
+      }
+
+      ctx.restore();
+    });
+  }
+};
+
+// Hovered phase state — null or 0/1/2
+let hoveredPhase = null;
+
+// Phase background + label plugin for main chart
+const phasePlugin = {
+  id: 'phases',
+  beforeDraw(chart) {
+    const {ctx, chartArea:{top, bottom}, scales:{x}} = chart;
+    if (!x) return;
+    const phaseDefs = [
+      {from:1,  to:34, base:'rgba(55,138,221,0.05)',  hover:'rgba(55,138,221,0.15)'},
+      {from:35, to:44, base:'rgba(136,135,128,0.06)', hover:'rgba(136,135,128,0.18)'},
+      {from:45, to:74, base:'rgba(99,153,34,0.05)',   hover:'rgba(99,153,34,0.15)'},
+    ];
+    phaseDefs.forEach(({from, to, base, hover}, i) => {
+      const color = hoveredPhase === i ? hover : base;
+      ctx.save(); ctx.fillStyle = color;
+      ctx.fillRect(x.getPixelForValue(from), top, x.getPixelForValue(to) - x.getPixelForValue(from), bottom - top);
+      ctx.restore();
+    });
+    [
+      {from:1,  to:34, label:'Phase 1 — launch & decay',  color:'#185FA5'},
+      {from:35, to:44, label:'Phase 2 — threshold',        color:'#5F5E5A'},
+      {from:45, to:74, label:'Phase 3 — sustained growth', color:'#3B6D11'},
+    ].forEach(({from, to, label, color}) => {
+      const x0 = x.getPixelForValue(from), x1 = x.getPixelForValue(to), mid = (x0+x1)/2;
+      ctx.save(); ctx.fillStyle = color;
+      ctx.font = '10px Helvetica Neue,Arial,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, mid, top + 11);
+      ctx.restore();
+    });
+  }
+};
+
+// Date label helper — converts array index to "Thu Jan 22"
+const startDate = new Date('2026-01-22');
+function dayLabel(idx) {
+  const d = new Date(startDate);
+  d.setDate(d.getDate() + idx);
+  return d.toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'});
+}
+const tooltipTitle = items => dayLabel(items[0].dataIndex);
+
+// === CHARTS ===
+// Strategy: render mainChart first, read its chartArea.left, then force identical
+// left padding on signalChart and annotChart so all x-axes are pixel-aligned.
+
+const mainChart = new Chart(document.getElementById('mainChart').getContext('2d'), {
+  type:'line',
+  plugins:[phasePlugin, clusterPlugin('main')],
+  data:{
+    labels: dates,
+    datasets:[
+      {label:'Algorithmic',           data:algo,      borderColor:'#378ADD', backgroundColor:'rgba(55,138,221,0.07)', borderWidth:2,   pointRadius:0, fill:true, tension:0.35, order:1},
+      {label:'Independent playlists', data:indep,     borderColor:'#E23B3B', backgroundColor:'rgba(226,59,59,0.07)',  borderWidth:2,   pointRadius:0, fill:true, tension:0.35, order:2},
+      {label:'Editorial',             data:editorial, borderColor:'#1D9E75', backgroundColor:'rgba(29,158,117,0.05)', borderWidth:1.5, pointRadius:0, fill:true, tension:0.35, order:3}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{title:tooltipTitle, label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()}, itemSort:(a,b)=>b.parsed.y-a.parsed.y}
+    },
+    scales:{
+      x:{ticks:{autoSkip:true, maxTicksLimit:12, maxRotation:0, font:{size:10}, color:'#888'}, grid:{display:false}},
+      y:{ticks:{callback:v=>(v/1000).toFixed(0)+'k', font:{size:10}, color:'#888'}, grid:{color:'rgba(0,0,0,0.04)'}, title:{display:true, text:'Daily streams', font:{size:10}, color:'#999'}}
+    }
+  }
+});
+
+// After mainChart renders, read its exact chartArea and force left/right padding
+// on the other two charts so their plot areas are perfectly aligned
+function buildAlignedCharts() {
+  const ca = mainChart.chartArea;
+  const cw = mainChart.canvas.offsetWidth;
+  const leftPad  = ca.left;
+  const rightPad = cw - ca.right;
+
+  const signalChart = new Chart(document.getElementById('signalChart').getContext('2d'), {
+    type:'bar',
+    plugins:[clusterPlugin('signal')],
+    data:{
+      labels: dates,
+      datasets:[
+        {label:'Saves',         data:saves,   backgroundColor:'rgba(83,74,183,0.55)', borderWidth:0, barPercentage:0.8, categoryPercentage:0.6},
+        {label:'Playlist adds', data:pl_adds, backgroundColor:'rgba(186,117,23,0.5)', borderWidth:0, barPercentage:0.8, categoryPercentage:0.6}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      layout:{padding:{left:leftPad, right:rightPad}},
+      interaction:{mode:'index', intersect:false},
+      plugins:{legend:{display:false}, tooltip:{callbacks:{title:tooltipTitle, label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString()}}},
+      scales:{
+        x:{ticks:{display:false}, grid:{display:false}, border:{display:false}},
+        y:{display:false}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('annotChart').getContext('2d'), {
+    type:'line',
+    plugins:[annotPlugin],
+    data:{
+      labels: dates,
+      datasets:[{data:dates.map(()=>1), borderColor:'transparent', backgroundColor:'transparent', pointRadius:0}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      animation:false,
+      layout:{padding:{left:leftPad, right:rightPad}},
+      plugins:{legend:{display:false}, tooltip:{enabled:false}},
+      scales:{
+        x:{ticks:{display:false}, grid:{display:false}, border:{display:false}},
+        y:{display:false, min:0, max:2}
+      }
+    }
+  });
+}
+
+// Wire phase card hover → chart highlight + editorial line tooltip
+function initPhaseHover() {
+  document.querySelectorAll('.phase').forEach((el, i) => {
+    el.addEventListener('mouseenter', () => { hoveredPhase = i; mainChart.update('none'); });
+    el.addEventListener('mouseleave', () => { hoveredPhase = null; mainChart.update('none'); });
+  });
+
+  // Editorial tooltip — floating div
+  const tip = document.createElement('div');
+  tip.style.cssText = 'position:fixed;pointer-events:none;display:none;background:#1a1a1a;color:#fff;font-size:11px;line-height:1.5;padding:7px 10px;border-radius:5px;white-space:nowrap;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.2)';
+  document.body.appendChild(tip);
+
+  const canvas = mainChart.canvas;
+  const HIT = 8; // px either side of line counts as a hover
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const {scales:{x}, chartArea:{top, bottom}} = mainChart;
+    if (!x) return;
+    const mouseY = e.clientY - rect.top;
+    if (mouseY < top || mouseY > bottom) { tip.style.display = 'none'; return; }
+
+    let hit = null;
+    editorials.forEach(ed => {
+      const px = x.getPixelForValue(ed.idx);
+      if (Math.abs(mouseX - px) <= HIT) hit = ed;
+    });
+
+    if (hit) {
+      tip.textContent = hit.detail;
+      tip.style.display = 'block';
+      tip.style.left = (e.clientX + 12) + 'px';
+      tip.style.top  = (e.clientY - 10) + 'px';
+      canvas.style.cursor = 'crosshair';
+    } else {
+      tip.style.display = 'none';
+      canvas.style.cursor = '';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    tip.style.display = 'none';
+    canvas.style.cursor = '';
+  });
+}
+
+// Use animation complete to ensure chartArea is fully resolved
+mainChart.options.animation = {
+  onComplete() { buildAlignedCharts(); initPhaseHover(); mainChart.options.animation = {}; }
+};
+</script>
+</body>
+</html>
